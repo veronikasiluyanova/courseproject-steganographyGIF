@@ -1,0 +1,308 @@
+﻿<Window x:Class="Steganography_GIF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Steganography_GIF"
+        mc:Ignorable="d"
+        Title="StegoGIF" Height="800" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TabControl x:Name="tcMain" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Height="760" Width="770"
+                    Background="#2e4a69">
+            <TabItem Header="Side A"
+                     FontWeight="DemiBold" Foreground="#2e4a69" Background="White">
+                <Grid Background="#b5decf">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid x:Name="sideGrid"
+                          Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="0.8*" />
+                        </Grid.RowDefinitions>
+                        <GridSplitter  Grid.RowSpan="3" HorizontalAlignment="Right" Height="770" Width="5" Background="#2e4a69"/>
+                        <GroupBox x:Name="gbInfo" Header="GIF info" 
+                                  Grid.Row="0"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  Height="267" Width="171"
+                                  Foreground="#2e4a69" FontWeight="DemiBold" Margin="10,19">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="tblSize" Text="GIF size:"
+                                           Grid.Row="0"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Width="151"
+                                           Style="{DynamicResource TextBlockStyle}"/>
+                                <TextBlock x:Name="tblPaletteSize" Text="Palette size:"
+                                           Grid.Row="1"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Width="151"
+                                           Style="{DynamicResource TextBlockStyle}" />
+                                <TextBlock x:Name="tblPossibleLength" Text="Possible text length:"
+                                           Grid.Row="2"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Width="151"
+                                           Style="{DynamicResource TextBlockStyle}"/>
+                                <TextBlock x:Name="tblTextLength" Text="Text length:"
+                                           Grid.Row="3"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Width="151"
+                                           Style="{DynamicResource TextBlockStyle}"/>
+                            </Grid>
+                        </GroupBox>
+                        <Button x:Name="btnExit" Content="Exit"
+                                Grid.Row="2"
+                                Command="Close"
+                                Style="{DynamicResource ButtonStyle}"/>
+                    </Grid>
+
+                    <Grid x:Name="centerGrid"
+                          Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="0.8*" />
+                        </Grid.RowDefinitions>
+
+                        <GroupBox x:Name="gbEmbed" Header="Embed message" 
+                                  Grid.Row="0"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  Height="267" Width="492" 
+                                  Foreground="#2e4a69" FontWeight="DemiBold">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="1.2*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock x:Name="tblGif" Text="Load GIF"
+                                           Grid.Row="0" Grid.Column="0"
+                                           VerticalAlignment="Center" HorizontalAlignment="Right"
+                                           Width="60"
+                                           />
+                                <TextBox x:Name="tbLoadGif"
+                                         Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center"
+                                         Width="200"
+                                         Foreground="#2e4a69"/>
+                                <Button x:Name="btnLoadGif" Content="Browse"
+                                        Grid.Row="0" Grid.Column="3" 
+                                        Style="{DynamicResource ButtonStyle}"
+                                        HorizontalAlignment="Left"
+                                        Command="Open"/>
+
+                                <TextBlock x:Name="tblFile" Text="Load file"
+                                           Grid.Row="1" Grid.Column="0"
+                                           VerticalAlignment="Center" HorizontalAlignment="Right"
+                                           Width="60"
+                                           />
+                                <TextBox x:Name="tbLoadFile"
+                                         Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center"
+                                         Width="200"
+                                         Foreground="#2e4a69"/>
+                                <Button x:Name="btnLoadFile" Content="Browse"
+                                        Grid.Row="1" Grid.Column="3" 
+                                        Style="{DynamicResource ButtonStyle}"
+                                        HorizontalAlignment="Left"
+                                        Command="Open"/>
+
+                                <TextBlock Text="or"
+                                           Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                           VerticalAlignment="Center" HorizontalAlignment="Right"
+                                           Width="45" Height="16"/>
+
+                                <TextBlock x:Name="tblInput" Text="Input text"
+                                           Grid.Row="2" Grid.Column="0"
+                                           VerticalAlignment="Center" HorizontalAlignment="Right"
+                                           Width="60" />
+                                <TextBox x:Name="tbInputText"
+                                         Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Justify"
+                                         Width="200" Height="50"
+                                         Foreground="#2e4a69" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                                <TextBlock x:Name="tblSave" Text="Save to"
+                                           Grid.Row="3" Grid.Column="0"
+                                           VerticalAlignment="Center" HorizontalAlignment="Right"
+                                           Width="55"/>
+                                <TextBox x:Name="tbSaveTo"
+                                         Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center"
+                                         Width="200"
+                                         Foreground="#2e4a69"/>
+                                <Button x:Name="btnSave" Content="Browse"
+                                        Grid.Row="3" Grid.Column="3" 
+                                        Style="{DynamicResource ButtonStyle}"
+                                        HorizontalAlignment="Left"
+                                        Command="Save"/>
+                                <RadioButton x:Name="rbtnLSB" Content="LSB" 
+                                             Grid.Column="1" Grid.Row="4" 
+                                             HorizontalAlignment="Center" VerticalAlignment="Top"
+                                             Foreground="#2e4a69"
+                                             Checked="rbtnLSB_Checked"/>
+                                <RadioButton x:Name="rbtnPalExt" Content="Palette Extension" 
+                                             Grid.Column="2" Grid.Row="4" 
+                                             HorizontalAlignment="Left" VerticalAlignment="Top"
+                                             Foreground="#2e4a69"
+                                             Checked="rbtnPalExt_Checked"/>
+                                <Button x:Name="btnEmbed" Content="Complete"
+                                        Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" 
+                                        Style="{DynamicResource ButtonStyle}"
+                                        HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                                        Margin="85,0,85,10"
+                                        Click="btnEmbed_Click"/>
+
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox x:Name="gbPreview" Header="GIF preview" 
+                                  Grid.Row="1"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  Height="285"  Width="492"
+                                  Foreground="#2e4a69" FontWeight="DemiBold">
+
+                            <MediaElement Name="gifPreview" LoadedBehavior="Manual" MediaEnded="gifPreview_MediaEnded"/>
+
+                        </GroupBox>
+                        <GroupBox x:Name="gbResult" Header="" 
+                                  Grid.Row="2"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  Height="58" Width="492" 
+                                  Foreground="#2e4a69">
+                            <TextBlock x:Name="tblResult" Text="Ready to work"
+                                       VerticalAlignment="Center"
+                                       Height="30"
+                                       FontSize="13"/>
+                        </GroupBox>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Side B"
+                     FontWeight="DemiBold" Foreground="#2e4a69" Background="White">
+                <Grid x:Name="centerGrid_B"
+                          Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="0.5*" />
+                    </Grid.RowDefinitions>
+
+                    <GroupBox x:Name="gbExtract" Header="Embed message" 
+                                  Grid.Row="0"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  Height="250" Width="492" 
+                                  Foreground="#b5decf" FontWeight="DemiBold">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="1.2*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock x:Name="tblGif_B" Text="Load GIF"
+                                           Grid.Row="0" Grid.Column="0"
+                                           VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                           Width="60"
+                                           />
+                            <TextBox x:Name="tbLoadGif_B"
+                                         Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                                         VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                         Width="200"
+                                         Foreground="#2e4a69"/>
+                            <Button x:Name="btnLoadGif_B" Content="Browse"
+                                        Grid.Row="0" Grid.Column="3" 
+                                        Style="{DynamicResource ButtonStyle_B}"
+                                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                        Command="Open"/>
+
+                            <TextBlock x:Name="tblSave_B" Text="Save to"
+                                           Grid.Row="3" Grid.Column="0"
+                                           VerticalAlignment="Top" HorizontalAlignment="Right"
+                                           Width="55"/>
+                            <TextBox x:Name="tbSaveTo_B"
+                                         Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                                         VerticalAlignment="Top" HorizontalAlignment="Center"
+                                         Width="200"
+                                         Foreground="#2e4a69"/>
+                            <Button x:Name="btnSave_B" Content="Browse"
+                                        Grid.Row="3" Grid.Column="3" 
+                                        Style="{DynamicResource ButtonStyle_B}"
+                                        HorizontalAlignment="Left" VerticalAlignment="Top"
+                                        Command="Save"/>
+                            <RadioButton x:Name="rbtnLSB_B" Content="LSB" 
+                                             Grid.Column="1" Grid.Row="1" 
+                                             HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                             Foreground="#b5decf"
+                                             Checked="rbtnLSB_B_Checked"/>
+                            <RadioButton x:Name="rbtnPalExt_B" Content="Palette Extension" 
+                                             Grid.Column="2" Grid.Row="1" 
+                                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                             Foreground="#b5decf"
+                                             Checked="rbtnPalExt_B_Checked"/>
+                            <Button x:Name="btnExtract" Content="Extract"
+                                        Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" 
+                                        Style="{DynamicResource ButtonStyle_B}"
+                                        HorizontalAlignment="Center" VerticalAlignment="Top" 
+                                        Click="btnExtract_Click"/>
+
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox x:Name="gbPreview_B" Header="GIF preview" 
+                                  Grid.Row="1"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  Height="285"  Width="492"
+                                  Foreground="#b5decf" FontWeight="DemiBold">
+
+                        <MediaElement Name="gifPreview_B" LoadedBehavior="Manual" MediaEnded="gifPreview_B_MediaEnded"/>
+
+                    </GroupBox>
+                    <GroupBox x:Name="gbResult_B" Header="" 
+                                  Grid.Row="2"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  Height="58" Width="492" 
+                                  Foreground="#2e4a69">
+                        <TextBlock x:Name="tblResult_B" Text="Ready to work"
+                                       VerticalAlignment="Center"
+                                       Height="30"
+                                       Foreground="#b5decf" FontSize="13"/>
+                    </GroupBox>
+                    <Button x:Name="btnExit_B" Content="Exit"
+                                Grid.Row="3"
+                                Command="Close"
+                                Style="{DynamicResource ButtonStyle_B}"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
