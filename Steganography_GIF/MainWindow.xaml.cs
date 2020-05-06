@@ -171,12 +171,12 @@ namespace Steganography_GIF
                         if (LSB)
                         {
                             File.WriteAllBytes(gifPath_new, GIFEncryptorByLSBMethod.Encrypt(gifPath, text));
-                            tblResult.Text = "Complete successfully!";
+                            tblResult.Text = "Completed successfully!";
                         }
                         else if (palExt)
                         {
                             File.WriteAllBytes(gifPath_new, GIFEncryptorByPaletteExtensionMethod.Encrypt(gifPath, text));
-                            tblResult.Text = "Complete successfully!";
+                            tblResult.Text = "Completed successfully!";
                         }
                         else
                         {
@@ -207,12 +207,12 @@ namespace Steganography_GIF
                     if (LSB_B)
                     {
                         File.WriteAllBytes(filePath_B, GIFEncryptorByLSBMethod.Decrypt(gifPath_B));
-                        tblResult_B.Text = "Complete successfully!";
+                        tblResult_B.Text = "Completed successfully!";
                     }
                     else if (palExt_B)
                     {
                         File.WriteAllBytes(filePath_B, GIFEncryptorByPaletteExtensionMethod.Decrypt(gifPath_B));
-                        tblResult_B.Text = "Complete successfully!";
+                        tblResult_B.Text = "Completed successfully!";
                     }
                     else
                     {
